@@ -40,7 +40,7 @@ class presenceController extends Controller
      */
     public function store(Request $request)
     {
-
+      // return $request;
       $jam_absen = date("Y-m-d")." ".$request->clock;
       $jam_masuk = date("Y-m-d")." "."08:10:00";
       $state = "";
@@ -53,7 +53,7 @@ class presenceController extends Controller
       if ($estimated < 0) {
           $estimated = $estimated;
       } else {
-            $estimated = "";
+          $estimated = "";
       }
       $presence = new presence;
       $presence->user_id = Auth::user()->id;
@@ -64,10 +64,11 @@ class presenceController extends Controller
       $result = $presence->save();
       
       if ($result) {
-        return redirect()->route('presence.index')->with('status', "Data Presence Has Been Input");
-        // return response()->json($result);
+        // return redirect()->route('home')->with('status', "Data Presence Has Been Input");
+        return response()->json(['msg' => 'success']);
       } else {
-        return redirect()->route('presence.index')->withErrors('status', 'Some Thing Wrong!');
+        // return redirect()->route('home')->withErrors('status', 'Some Thing Wrong!');
+        return response()->json(['msg' => 'some thing wrong!']);
       }
     }
 

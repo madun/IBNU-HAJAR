@@ -41,7 +41,7 @@
           <div class="x_title">
             <h2>MASTER DATA &nbsp;<i class="fa fa-angle-right fa-lg"></i>&nbsp; DATA PRESENCE</h2>
 
-            <div cl{{-- ass="pull-right">
+            {{-- <div class="pull-right">
               <a href="{{ route('presence.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> ADD PRESENCE</a>
             </div>  --}}
             <div class="clearfix"></div>

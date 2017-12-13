@@ -1,158 +1,71 @@
 @extends('layouts.app')
 
+@section('title', 'IBNU HAJAR | Login')
+
 @section('content')
-<section class="page-section mb-sm-70 mb-xs-20 mt-sm-70 mt-xs-30">
-    <div class="container relative">
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading">Login</div>
 
-        <!-- Nav Tabs -->
-        {{-- <div class="align-center mb-40 mb-xxs-30">
-            <ul class="nav nav-tabs tpl-minimal-tabs">
+                <div class="panel-body">
+                    <form class="form-horizontal" method="POST" action="{{ route('user.login') }}">
+                        {{ csrf_field() }}
 
-                <li class="active">
-                    <a href="#mini-one" data-toggle="tab">Login</a>
-                </li>
+                        <div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
+                            <label for="username" class="col-md-4 control-label">Username</label>
 
-                <li>
-                    <a href="#mini-two" data-toggle="tab">Registration</a>
-                </li>
+                            <div class="col-md-6">
+                                <input id="username" type="username" class="form-control" name="username" value="{{ old('username') }}" required autofocus>
 
-            </ul>
-        </div> --}}
-        <!-- End Nav Tabs -->
-
-        <!-- Tab panes -->
-        <div class="tab-content tpl-minimal-tabs-cont section-text">
-
-            <div class="tab-pane fade in active" id="mini-one">
-
-                <!-- Login Form -->
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-4">
-                      <div class="alert custome">
-                        @if (session('Status'))
-                            <i class="fa fa-lg fa-check-circle-o"></i>
-                            {{ session('Status')}}
-                        @endif
-                      </div>
-
-                        <form class="form contact-form" id="contact_form" method="POST" action="{{ route('user.login') }}">
-                          {{ csrf_field() }}
-                            <div class="clearfix">
-
-                                <!-- Username -->
-                                <div class="form-group{{ $errors->any() ? ' has-error' : '' }}">
-                                    <input type="text" name="username" id="username" class="input-md round form-control" placeholder="Username" pattern=".{3,100}" value="{{ old('username') }}">
-                                </div>
-                                @if ($errors->any())
+                                @if ($errors->has('username'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first() }}</strong>
+                                        <strong>{{ $errors->first('username') }}</strong>
                                     </span>
                                 @endif
-
-                                <!-- Password -->
-                                <div class="form-group{{ $errors->any() ? ' has-error' : '' }}">
-                                    <input type="password" name="password" id="password" class="input-md round form-control" placeholder="Password" pattern=".{5,100}">
-                                </div>
-                                @if ($errors->any())
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first() }}</strong>
-                                    </span>
-                                @endif
-
                             </div>
+                        </div>
 
-                            <div class="clearfix">
+                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                            <label for="password" class="col-md-4 control-label">Password</label>
 
-                                <div class="cf-left-col">
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control" name="password" required>
 
-                                    <!-- Inform Tip -->
-                                    <div class="form-tip pt-20">
-                                        <a href="{{ route('user.password.request') }}"></a>
-                                    </div>
-
-                                </div>
-
-                                <div class="cf-right-col">
-
-                                    <!-- Send Button -->
-                                    <div class="align-right pt-10">
-                                        <button class="submit_btn btn btn-mod btn-medium btn-round" id="login-btn">Login</button>
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </form>
-
-                    </div>
-                </div>
-                <!-- End Login Form -->
-
-            </div>
-
-            {{-- <div class="tab-pane fade" id="mini-two">
-
-                <!-- Registry Form -->
-                <div class="row">
-                    <div class="col-md-4 col-md-offset-4">
-
-                        <form class="form contact-form" id="contact_form" method="POST" action="{{ route('user.register.submit') }}">
-                          {{ csrf_field() }}
-                            <div class="clearfix">
-
-                                <!-- Email -->
-                                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                                    <input type="text" name="email" id="email" class="input-md round form-control" placeholder="email" pattern=".{3,100}" value="{{ old('email') }}" required>
-                                </div>
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-
-                                <!-- Username -->
-                                <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                                    <input type="text" name="name" id="name" class="input-md round form-control" placeholder="name" pattern=".{3,100}" value="{{ old('name') }}" required>
-                                </div>
-                                @if ($errors->has('name'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
-                                    </span>
-                                @endif
-
-                                <!-- Password -->
-                                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                                    <input type="password" name="password" id="password" class="input-md round form-control" placeholder="Password" pattern=".{5,100}" required>
-                                </div>
                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
+                            </div>
+                        </div>
 
-                                <!-- Re-enter Password -->
-                                <div class="form-group">
-                                    <input type="password" name="password_confirmation" id="password-password_confirmation" class="input-md round form-control" placeholder="Re-enter Password" pattern=".{5,100}" required>
+                        {{-- <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
+                                    </label>
                                 </div>
-
                             </div>
+                        </div> --}}
 
-                            <!-- Send Button -->
-                            <div class="pt-10">
-                                <button class="submit_btn btn btn-mod btn-medium btn-round btn-full" id="reg-btn">Register</button>
+                        <div class="form-group">
+                            <div class="col-md-8 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Login
+                                </button>
+
+                                {{-- <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    Forgot Your Password?
+                                </a> --}}
                             </div>
-
-                        </form>
-
-                    </div>
+                        </div>
+                    </form>
                 </div>
-                <!-- End Registry Form -->
-
-            </div> --}}
-
+            </div>
         </div>
-
     </div>
-</section>
+</div>
 @endsection

@@ -116,10 +116,10 @@ class santriController extends Controller
       // $result = $user->saveOrFail();
       $result = $user->save();
       if ($result) {
-        return redirect()->route('data_santri.index')->with('status', $msg);
+        return redirect()->route('santri.index')->with('status', $msg);
         // return $user;
       } else {
-        return redirect()->route('data_santri.index')->withErrors('status', 'Some Thing Wrong!');
+        return redirect()->route('santri.index')->withErrors('status', 'Some Thing Wrong!');
       }
     }
 
