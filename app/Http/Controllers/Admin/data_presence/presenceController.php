@@ -40,7 +40,6 @@ class presenceController extends Controller
      */
     public function store(Request $request)
     {
-        // return response()->json($request);
 
       $jam_absen = date("Y-m-d")." ".$request->clock;
       $jam_masuk = date("Y-m-d")." "."08:10:00";
